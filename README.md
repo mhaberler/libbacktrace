@@ -7,26 +7,28 @@ libbacktrace was originally writen by Ian Lance Taylor as part of GCC.
 Building libbacktrace requires CMake.
 
 
-To build for use with machinekit:
+To build for use with machinekit on debian:
 
    sudo apt-get install libdw-dev cmake
-   git clone 
+   git clone git://github.com/mhaberler/libbacktrace.git
+   mkdir build
+   cd build
+   cmake -G'Unix Makefiles' -DENABLE_LIBBACKTRACE_TEST=true ../libbacktrace
+   make
+
+   # verify the library works:
+   ./btest
+
+   # output should be:
+   PASS: backtrace_full noinline
+   PASS: backtrace_full inline
+   PASS: backtrace_simple noinline
+   PASS: backtrace_simple inline
+   PASS: backtrace_syminfo variable
+
+   # then
+   sudo make install
    
+then run src/configure again in the machinekit directory, and rebuild.
 
-How to build with ninja:
 
-    mkdir build
-    cd build/
-    cmake -GNinja -DENABLE_LIBBACKTRACE_TEST=true path/to/libbacktrace/source
-    ninja
-
-How to build with make:
-
-    mkdir build
-    cd build/
-    cmake -G'Unix Makefiles' -DENABLE_LIBBACKTRACE_TEST=true path/to/libbacktrace/source
-    make
-
-How to run the tests:
-
-    ctest
