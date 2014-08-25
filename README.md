@@ -6,6 +6,13 @@ libbacktrace was originally writen by Ian Lance Taylor as part of GCC.
 
 Building libbacktrace requires CMake.
 
+
+To build for use with machinekit:
+
+   sudo apt-get install libdw-dev cmake
+   git clone 
+   
+
 How to build with ninja:
 
     mkdir build
